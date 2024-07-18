@@ -50,6 +50,22 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'user-delete',
                 'guard_name' => 'web',
             ],
+            [
+                'name' => 'master-team-list',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'master-team-create',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'master-team-edit',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'master-team-delete',
+                'guard_name' => 'web',
+            ],
         ]);
     }
 }

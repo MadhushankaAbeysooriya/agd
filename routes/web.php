@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MyLocationController;
 use App\Http\Controllers\LoginDetailController;
+use App\Http\Controllers\master\TeamController;
 use App\Http\Controllers\ChangePasswordController;
 
 
@@ -39,5 +40,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/change-password', [ChangePasswordController::class,'store'])->name('change.password');
 
     Route::get('/logindetails',[LoginDetailController::class,'index'])->name('logindetails.index');
+
+    Route::resource('teams', TeamController::class);
 
 });
