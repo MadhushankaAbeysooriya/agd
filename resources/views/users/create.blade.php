@@ -37,34 +37,29 @@
                             <div class="card-body">
 
                                 <div class="form-group row">
-                                    <label for="regt_no" class="col-form-label col-sm-2">Officers/ORs No</label>
-                                    
+                                    <label for="username" class="col-sm-2 col-form-label">Username</label>
                                     <div class="col-sm-6">
-                                        
-                                        <input type="text" class="form-control text-uppercase @error('regt_no')
-                                        is-invalid @enderror" name="regt_no" value="{{ old('regt_no') }}" id="regt_no" >
-                                        <span class="text-danger">@error('regt_no') {{ $message }} @enderror</span>
-                                    </div>                                
+                                        <input type="text" class="form-control @error('username')
+                                        is-invalid @enderror" name="username" value="{{ old('username') }}" id="username" autocomplete="off">
+                                        <span class="text-danger">@error('username') {{ $message }} @enderror</span>
+                                    </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="rank_id">Rank</label>
-                                    <div class="col-sm-6">
-                                        
-                                            <select id="rank_id" name="rank_id" class="form-control select2">
-                                                @foreach($ranks as $value => $label)
-                                                    <option value="{{ $value }}">{{ $label }}</option>
-                                                @endforeach
-                                            </select>
-                                     </div>
-                                 </div>
-                                
 
                                 <div class="form-group row">
-                                    <label for="name" class="col-sm-2 col-form-label">Name</label>
+                                    <label for="fname" class="col-sm-2 col-form-label">First Name</label>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control @error('name')
-                                        is-invalid @enderror" name="name" value="{{ old('name') }}" id="name" autocomplete="off">
-                                        <span class="text-danger">@error('name') {{ $message }} @enderror</span>
+                                        <input type="text" class="form-control @error('fname')
+                                        is-invalid @enderror" name="fname" value="{{ old('fname') }}" id="fname" autocomplete="off">
+                                        <span class="text-danger">@error('fname') {{ $message }} @enderror</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control @error('lname')
+                                        is-invalid @enderror" name="lname" value="{{ old('lname') }}" id="lname" autocomplete="off">
+                                        <span class="text-danger">@error('lname') {{ $message }} @enderror</span>
                                     </div>
                                 </div>
 
@@ -77,20 +72,29 @@
                                     </div>
                                 </div>
 
-                                {{--<div class="form-group row">--}}
-                                    {{--<label for="phone" class="col-sm-2 col-form-label">Phone</label>--}}
-                                    {{--<div class="col-sm-6">--}}
-                                        {{--<input type="text" class="form-control @error('phone')--}}
-                                        {{--is-invalid @enderror" name="phone" value="{{ old('phone') }}" id="phone" autocomplete="off">--}}
-                                        {{--<span class="text-danger">@error('phone') {{ $message }} @enderror</span>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
+                                <div class="form-group row">
+                                    <label for="mobile" class="col-sm-2 col-form-label">Mobile</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control @error('mobile')
+                                        is-invalid @enderror" name="mobile" value="{{ old('mobile') }}" id="mobile" autocomplete="off">
+                                        <span class="text-danger">@error('mobile') {{ $message }} @enderror</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="nic" class="col-sm-2 col-form-label">NIC</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control @error('nic')
+                                        is-invalid @enderror" name="nic" value="{{ old('nic') }}" id="nic" autocomplete="off">
+                                        <span class="text-danger">@error('nic') {{ $message }} @enderror</span>
+                                    </div>
+                                </div>
 
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="roles">Role</label>
                                     <div class="col-sm-6 select2-blue">
-                                        <select required name="roles[]" id="roles" class="multiple form-control">
+                                        <select required name="roles[]" id="roles" class="multiple form-control" multiple>
                                             @foreach($roles as $role)
                                                 <option value="{{ $role }}">{{ $role }}</option>
                                             @endforeach
@@ -101,19 +105,6 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="location_id" class="col-sm-2 col-form-label">Location</label>
-                                    <div class="col-sm-6">
-                                        <select class="form-control select2" name="location_id" id="location_id" autocomplete="off">
-                                            <option value="" selected>select one</option>
-                                            @foreach($locations as $location)
-                                                <option value="{{$location->id}}">{{$location->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        <span class="text-danger">@error('location_id') {{ $message }} @enderror</span>
                                     </div>
                                 </div>
 
@@ -141,7 +132,6 @@
                                         <button type="reset" class="btn btn-sm btn-secondary">Cancel</button>
                                         <button type="submit" class="btn btn-sm btn-success" >Create</button>
 
-                                        {{-- <button class="btn btn-sm btn-primary" onclick="showAlert()">Show Alert</button> --}}
                                 </div>
                             </div>
 
@@ -156,27 +146,15 @@
 
 @section('third_party_stylesheets')
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.css') }}">
-
-    <style>
-        .select2-selection--single
-        {
-            height: 38px!important;
-        }
-    </style>
-
 @endsection
 
 @section('third_party_scripts')
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}" ></script>
     <script src="{{asset('plugins/select2/js/select2.js')}}" defer></script>
-
     <script>
-
         $(document).ready(function() {
-            $('.select2').select2();
+            $('.multiple').select2();
         });
-
     </script>
-
 @endsection
 

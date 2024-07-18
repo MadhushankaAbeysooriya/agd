@@ -30,7 +30,7 @@ class UserDataTable extends DataTable
                     return 'N/A';
                 }else{
                     return Carbon::parse($user->last_login_date)->format('Y-m-d');
-                }                
+                }
             })
             ->editColumn('last_login_ip', function ($user) {
                 if($user->last_login_ip == null)
@@ -73,7 +73,7 @@ class UserDataTable extends DataTable
 
            return $btn;
             })
-            
+
             ->addColumn('roles', function ($user) {
                 $roles = $user->getRoleNames();
                 $badges = '';
@@ -94,8 +94,7 @@ class UserDataTable extends DataTable
      */
     public function query(User $model): QueryBuilder
     {
-        return $model->newQuery()
-        ->with('userlocation');
+        return $model->newQuery();
     }
 
     /**
@@ -125,13 +124,10 @@ class UserDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false)->width(20),            
-            Column::make('regt_no')->data('regt_no')->title('Regt No'),
-            Column::make('rank_name')->data('rank_name')->title('Rank'),
-            Column::make('name')->data('name')->title('Name'),
+            Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false)->width(20),
+
             Column::make('email')->data('email')->title('Email'),
             Column::computed('roles'),
-            Column::make('userlocation.name')->data('userlocation.name')->title('Location'),
             Column::computed('status'),
             Column::make('last_login_ip')->data('last_login_ip')->title('Login IP'),
             Column::make('last_login_date')->data('last_login_date')->title('Last Login Date'),

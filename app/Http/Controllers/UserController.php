@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\master\Location;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
@@ -10,7 +9,6 @@ use App\DataTables\UserDataTable;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
-use App\Enums\RankEnum;
 
 class UserController extends Controller
 {
@@ -44,10 +42,8 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('name','name')->all();
-        $locations = Location::all();
-        $ranks = RankEnum::getValues();
 
-        return view('users.create',compact('roles','locations', 'ranks'));
+        return view('users.create',compact('roles'));
     }
 
     /**
@@ -59,13 +55,13 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'regt_no' => 'required',
-            'rank_id' => 'required',
-            'name' => 'required',
+            'username' => 'required|unique:users,username',
+            'fname' => 'required',
+            'lname' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required',
-            'location_id' => 'required'
+            'mobile' => 'required|unique:users,mobile',
+            'nic' => 'required|unique:users,nic',
         ]);
 
         $input = $request->all();
@@ -86,7 +82,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::with(['userlocation'])->find($id);
+        $user = User::find($id);
         return view('users.show',compact('user'));
     }
 
@@ -98,13 +94,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $locations = Location::all();
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->toArray();
-        $ranks = RankEnum::getValues();
 
-        return view('users.edit',compact('user','roles','userRole','locations','ranks'));
+        return view('users.edit',compact('user','roles','userRole'));
     }
 
     /**
@@ -117,13 +111,13 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'regt_no' => 'required',
-            'rank_id' => 'required',
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id,
-            'password' => 'same:confirm-password',
-            'roles' => 'required',
-            'location_id' => 'required'
+            //'username' => 'required|unique:users,username',
+            'fname' => 'required',
+            'lname' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|same:confirm-password',
+            'mobile' => 'required|unique:users,mobile',
+            'nic' => 'required|unique:users,nic',
         ]);
 
         $input = $request->all();
@@ -156,17 +150,20 @@ class UserController extends Controller
                         ->with('success','User deleted successfully');
     }
 
-    public function inactive($user){
+    public function inactive($user)
+    {
         User::where('id',$user)->update(['status'=>'0']);
          return redirect()->route('users.index')->with( 'success',' account suspended');
     }
 
-    public function activate($user){
+    public function activate($user)
+    {
         User::where('id',$user)->update(['status'=>'1']);
         return redirect()->route('users.index')->with( 'success',' account activated');
     }
 
-    public function resetpass($user){
+    public function resetpass($user)
+    {
         User::where('id',$user)->update(['password' => Hash::make('abc@123')]);
         return redirect()->route('users.index')->with( 'success', ' Password Reset as abc@123');
     }

@@ -3,7 +3,7 @@
         <img src="{{ asset('images/logo.png');}}"
              alt="School Logo"
              class="brand-image img-circle elevation-3">
-        <span class="brand-text font-weight-light">RMS</span>
+        <span class="brand-text font-weight-light">{{ config('app.name') }}</span>
     </a>
 
     <div class="sidebar">

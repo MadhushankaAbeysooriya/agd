@@ -26,9 +26,6 @@
                     <div class="card card-teal">
                         <div class="card-header">
                             <h3 class="card-title">Update User</h3>
-                            {{-- <div class="card-tools">
-                                <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
-                            </div> --}}
                         </div>
 
                         <form role="form" action="{{ route('users.update',$user->id) }}" method="post"
@@ -39,33 +36,29 @@
                             <div class="card-body">
 
                                 <div class="form-group row">
-                                    <label for="regt_no" class="col-form-label col-sm-2">Officers/ORs No</label>
-                                    
+                                    <label for="username" class="col-sm-2 col-form-label">Username</label>
                                     <div class="col-sm-6">
-                                        
-                                        <input type="text" class="form-control text-uppercase @error('regt_no')
-                                        is-invalid @enderror" name="regt_no" value="{{ $user->name }}" id="regt_no" >
-                                        <span class="text-danger">@error('regt_no') {{ $message }} @enderror</span>
-                                    </div>                                
+                                        <input type="text" class="form-control @error('username')
+                                        is-invalid @enderror" name="username" value="{{ $user->username }}" id="username" autocomplete="off" disabled>
+                                        <span class="text-danger">@error('username') {{ $message }} @enderror</span>
+                                    </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="rank_id">Rank</label>
-                                    <div class="col-sm-6">
-                                        
-                                            <select id="rank_id" name="rank_id" class="form-control select2">
-                                                @foreach($ranks as $value => $label)
-                                                    <option value="{{ $value }}" {{ isset($user->rank_id)?$user->rank_id==$value?'selected':'':'' }}>{{ $label }}</option>
-                                                @endforeach
-                                            </select>
-                                     </div>
-                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="name" class="col-sm-2 col-form-label">Name</label>
+                                    <label for="fname" class="col-sm-2 col-form-label">First Name</label>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control @error('name')
-                                        is-invalid @enderror" name="name" value="{{ $user->name }}" id="name" autocomplete="off">
-                                        <span class="text-danger">@error('name') {{ $message }} @enderror</span>
+                                        <input type="text" class="form-control @error('fname')
+                                        is-invalid @enderror" name="fname" value="{{ $user->fname }}" id="fname" autocomplete="off">
+                                        <span class="text-danger">@error('fname') {{ $message }} @enderror</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control @error('lname')
+                                        is-invalid @enderror" name="lname" value="{{ $user->lname }}" id="lname" autocomplete="off">
+                                        <span class="text-danger">@error('lname') {{ $message }} @enderror</span>
                                     </div>
                                 </div>
 
@@ -78,14 +71,23 @@
                                     </div>
                                 </div>
 
-                                {{--<div class="form-group row">--}}
-                                    {{--<label for="phone" class="col-sm-2 col-form-label">Phone</label>--}}
-                                    {{--<div class="col-sm-6">--}}
-                                        {{--<input type="text" class="form-control @error('phone')--}}
-                                        {{--is-invalid @enderror" name="phone" value="{{ $user->phone }}" id="phone" autocomplete="off">--}}
-                                        {{--<span class="text-danger">@error('phone') {{ $message }} @enderror</span>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
+                                <div class="form-group row">
+                                    <label for="mobile" class="col-sm-2 col-form-label">Mobile</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control @error('mobile')
+                                        is-invalid @enderror" name="mobile" value="{{ $user->mobile }}" id="mobile" autocomplete="off">
+                                        <span class="text-danger">@error('mobile') {{ $message }} @enderror</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="nic" class="col-sm-2 col-form-label">NIC</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control @error('nic')
+                                        is-invalid @enderror" name="nic" value="{{ $user->nic }}" id="nic" autocomplete="off">
+                                        <span class="text-danger">@error('nic') {{ $message }} @enderror</span>
+                                    </div>
+                                </div>
 
                                 <div class="form-group row">
                                     <label class="col-sm-2" for="roles">Role</label>
@@ -104,37 +106,6 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="location_id" class="col-sm-2 col-form-label">Location</label>
-                                    <div class="col-sm-6">
-                                        <select class="form-control select2" name="location_id" id="location_id" autocomplete="off">
-                                            <option value="">select one</option>
-                                            @foreach($locations as $location)
-                                                <option {{ isset($user->location_id)?$user->location_id==$location->id?'selected':'':'' }} value="{{$location->id}}">{{$location->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        <span class="text-danger">@error('location_id') {{ $message }} @enderror</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="password" class="col-sm-2 col-form-label">Password</label>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control @error('password')
-                                        is-invalid @enderror" name="password" value="{{ old('password') }}" id="password" autocomplete="off">
-                                        <span class="text-danger">@error('password') {{ $message }} @enderror</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="confirm-password" class="col-sm-2 col-form-label">Confirm Password</label>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control @error('confirm-password')
-                                        is-invalid @enderror" name="confirm-password" value="{{ old('confirm-password') }}" id="confirm-password" autocomplete="off">
-                                        <span class="text-danger">@error('confirm-password') {{ $message }} @enderror</span>
                                     </div>
                                 </div>
 

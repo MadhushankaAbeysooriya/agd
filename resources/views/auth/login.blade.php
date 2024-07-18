@@ -1,98 +1,71 @@
-<!DOCTYPE html> 
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>{{ config('app.name') }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ asset('login/css/bootstrap.css'); }}">
-    <link rel="stylesheet" href="{{ asset('login/css/custom.css'); }}">
-    <link rel="stylesheet" href="{{ asset('login/css/custom.min.css'); }}">
-   
-    <link rel="stylesheet" href="{{ asset('login/css/animate.css'); }}">
-<!--     <link rel="stylesheet" href="css/prism-okaidia.css"> 
-    <link rel="stylesheet" href="css/font-awesome.min.css"> 
-     -->
-    <script src="{{ asset('login/js/wow.min.js'); }}"></script>
-    <script>
-    new WOW().init();
-    </script>
+<x-laravel-ui-adminlte::adminlte-layout>
 
-  </head>
-   <body class="body_bg_image">
+    <body class="hold-transition login-page">
+        <div class="login-box">
+            <div class="login-logo">
+                <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
+            </div>
+            <!-- /.login-logo -->
 
-<div class="container">
- 
-<div class="row">
-  <div class="col-lg-2"></div>
-   <div class="col-lg-4">
+            <!-- /.login-box-body -->
+            <div class="card">
+                <div class="card-body login-card-body">
+                    <p class="login-box-msg">Sign in to start your session</p>
 
-      <div class="wow fadeInLeft" style="text-align: center;">
-          <img src="{{ asset('login/img/Army_Logo_my.png'); }}" width="200px" align="centere" >
-      <p width="350px" align="centere"  style="color:rgb(255, 165, 0); font-size:35px; text-align: center; font-family: sans-serif; text-shadow: 1px 1px 2px black;"  >
+                    <form method="post" action="{{ url('/login') }}">
+                        @csrf
 
-        {{ config('app.name') }}</p> 
-          </div>
-     <br>  
-   </div>
-  <div class="col-lg-4 align-self-center wow fadeInRight">
- 
-        <form method="post" action="{{ url('/login') }}" autocomplete="off">
-            @csrf
-         
-          <div class="form-group">
-              <label class="form-label mt-4 login_title">Login </label>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control @error('email') is-invalid @enderror" id="floatingInput" 
-                placeholder="User name" name="email" autocomplete="off"  value="{{ old('email') }}"
-                pattern="^[a-zA-Z0-9_-]+$">
-                <label for="floatingInput">User name</label>
-                @error('email')
-                <span class="error invalid-feedback">{{ $message }}</span>
-                @enderror
-              </div>
-              <div class="form-floating">
-                <input type="password" class="form-control @error('password') is-invalid @enderror" id="floatingPassword" 
-                placeholder="Password"  name="password" pattern="^[^'"\\/]*$">
-                <label for="floatingPassword">Password</label>
-                @error('password')
-                <span class="error invalid-feedback">{{ $message }}</span>
-                @enderror
-              </div>
-          </div>
-          <div class="form-group">
-             <br>
-             <input  type="submit" class="btn btn-outline-info" value="Login">
-             <span class="text_white"title="" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Please type your valid user informations to login to system." data-bs-original-title="Help box">
-                 Help
-              </span>
+                        <div class="input-group mb-3">
+                            <input type="email" name="email" value="{{ old('email') }}" placeholder="Email"
+                                class="form-control @error('email') is-invalid @enderror">
+                            <div class="input-group-append">
+                                <div class="input-group-text"><span class="fas fa-envelope"></span></div>
+                            </div>
+                            @error('email')
+                                <span class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
 
-          </div>
+                        <div class="input-group mb-3">
+                            <input type="password" name="password" placeholder="Password"
+                                class="form-control @error('password') is-invalid @enderror">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                            @error('password')
+                                <span class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
 
-      </form>
-  </div>
-  
-</div>
+                        </div>
 
-</div> 
-<div class="newstyle fixed-bottom">
-    <div class="container">
-        <div class="row">
-          <div class="col-lg-2"></div>
-          <div class="col-lg-8">
-              <center><a href="#" class="footer_text">Software Solution by Dte of IT - SL Army</a></center>
-          </div>
-          <div class="col-lg-2 "><a href="#" class="footer_text"> Version 1.0.0 </a></div>
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="icheck-primary">
+                                    <input type="checkbox" id="remember">
+                                    <label for="remember">Remember Me</label>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            </div>
+
+                        </div>
+                    </form>
+
+                    {{-- <p class="mb-1">
+                        <a href="{{ route('password.request') }}">I forgot my password</a>
+                    </p>
+                    <p class="mb-0">
+                        <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
+                    </p> --}}
+                </div>
+                <!-- /.login-card-body -->
+            </div>
+
         </div>
-    </div>
-      
-    </div>
-
-
-</body>
- <script src="{{ asset('login/js/jquery.min.js') }}"></script>
- <script src="{{ asset('login/js/bootstrap.bundle.min.js'); }}"></script>
- <script src="{{ asset('login/js/prism.js'); }}" data-manual></script>  
- <script src="{{ asset('login/js/custom.js'); }}"></script> 
- 
-</html>
-
+        <!-- /.login-box -->
+    </body>
+</x-laravel-ui-adminlte::adminlte-layout>

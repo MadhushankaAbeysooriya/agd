@@ -36,10 +36,28 @@
 
                         <div class="form-group row">
                             <label class="col-sm-2">
-                                <strong>Name:</strong>
+                                <strong>Username:</strong>
                             </label>
                             <div class="col-sm-10">
-                                {{ $user->name }}
+                                {{ $user->username }}
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2">
+                                <strong>First Name:</strong>
+                            </label>
+                            <div class="col-sm-10">
+                                {{ $user->fname }}
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2">
+                                <strong>Last Name:</strong>
+                            </label>
+                            <div class="col-sm-10">
+                                {{ $user->lname }}
                             </div>
                         </div>
 
@@ -52,21 +70,21 @@
                             </div>
                         </div>
 
-                        {{--<div class="form-group row">--}}
-                        {{--<label class="col-sm-2">--}}
-                        {{--<strong>Phone:</strong>--}}
-                        {{--</label>--}}
-                        {{--<div class="col-sm-10">--}}
-                        {{--{{ $user->phone }}--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
+                        <div class="form-group row">
+                            <label class="col-sm-2">
+                                <strong>NIC:</strong>
+                            </label>
+                            <div class="col-sm-10">
+                                {{ $user->nic }}
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label class="col-sm-2">
-                                <strong>Location:</strong>
+                                <strong>Mobile:</strong>
                             </label>
                             <div class="col-sm-10">
-                                {{ $user->userlocation->name }}
+                                {{ $user->mobile }}
                             </div>
                         </div>
 

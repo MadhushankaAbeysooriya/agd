@@ -14,17 +14,13 @@
         </a>
 
         <ul class="nav nav-treeview">
-
-            {{-- @if(Auth::user()->can('master-location-list') ) --}}
-                <li class="nav-item">
-                    <a href="{{route('my-locations.index')}}" class="nav-link
-                        {{ request()->routeIs('my-locations*')?'active':'' }}">
-                        <i class="far fa-circle nav-icon text-blue"></i>
-                        <p>My Location</p>
-                    </a>
-                </li>
-            {{-- @endif --}}
-
+            <li class="nav-item">
+                <a href="{{route('teams.index')}}" class="nav-link
+                {{ request()->routeIs('teams.edit','teams.index')?'active':'' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                        <p>Class</p>
+                </a>
+            </li>
         </ul>
 
     </li>
