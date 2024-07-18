@@ -1,0 +1,17 @@
+Rule 1:	Sce 1 : Supplied (half) , not passed delivery deadline	- ok
+	Sce 2 : Supplied (full) , not passed delivery deadline	- ok
+	Sce 3 : Supplied (half) , passed delivery deadline	- ok , apply rule 1
+	Sce 4 : Supplied (full) , passed delivery deadline	- ok , apply rule 1
+
+	Sce 5 : Not Supplied , not passed delivery deadline	- ok	
+	Sce 6 : Not Supplied , passed delivery deadline		- ok
+
+Rule 2: Sce 1 : Supplied (half) , found duplicate items		- ok , apply rule 2
+	Sce 2 : Supplied (full) , found duplicate items		- ok , apply rule 2
+
+	Sce 3 : Not Supplied , not found duplicate items	- ok	
+
+Rule 3: Sce 1 : Supplied (half) , supplied item in alternative tbl	- ok , apply rule 3
+	Sce 2 : Supplied (full) , supplied item in alternative tbl	- ok , apply rule 3
+
+	Sce 3 : Not Supplied , not found duplicate items		- ok
