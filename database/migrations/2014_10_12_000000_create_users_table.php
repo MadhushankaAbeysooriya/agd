@@ -13,21 +13,18 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('regt_no')->nullable();
-            $table->bigInteger('rank_id')->nullable();
-            $table->string('name');
+            $table->string('username')->unique();
+            $table->string('fname');
+            $table->string('lname');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('mobile')->unique();
+            $table->string('nic')->unique();
 
-            $table->unsignedBigInteger('location_id')->nullable();
-            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
-
-            $table->tinyInteger('suspend')->default(0);
-
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status')->default(1)->comment('0=>in active, 1=>active');
 
             $table->dateTime('last_login_date')->nullable();
             $table->string('last_login_ip')->nullable();

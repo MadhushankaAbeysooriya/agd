@@ -4,16 +4,11 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\master\Location;
-use App\Models\Rank;
-use App\Models\Forces;
-use App\Models\Usertype;
-use Laravel\Sanctum\HasApiTokens;
+use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Model;
-use App\Enums\RankEnum;
 
 class User extends Authenticatable
 {
@@ -25,15 +20,15 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'regt_no',
-        'rank_id',
-        'name',
+        'username',
+        'fname',
+        'lname',
         'email',
         'password',
         'status',
+        'mobile',
+        'nic',
         'last_login_ip',
-        'suspend',
-        'location_id',
         'last_login_date',
     ];
 
@@ -56,17 +51,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    public function userlocation()
-    {
-        return $this->belongsTo(Location::class,'location_id','id');
-    }
-
-    protected $appends = ['rank_name'];
-
-    public function getRankNameAttribute()
-    {
-        return $this->rank_id ? RankEnum::getRankName($this->rank_id) : '';
-    }
-
 }
