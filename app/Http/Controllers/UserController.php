@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\master\Team;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\DataTables\UserDataTable;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
@@ -166,5 +168,28 @@ class UserController extends Controller
     {
         User::where('id',$user)->update(['password' => Hash::make('abc@123')]);
         return redirect()->route('users.index')->with( 'success', ' Password Reset as abc@123');
+    }
+
+    public function addUsersView($encryptedId)
+    {
+        $id = Crypt::decrypt($encryptedId);
+
+        $user = User::findOrFail($id);
+
+        $teams = Team::all();
+
+        $user_team = $user->teams->pluck('name','name')->toArray();
+
+        return view('users.add_teams',compact('user','teams','user_team'));
+    }
+
+    public function addUsers(User $user, Request $request)
+    {
+        if(!empty($request->users)){
+            $user->teams()->sync([$request->users]);
+        }
+
+        return redirect()->route('users.index')->with('success','Teams Added');
+
     }
 }

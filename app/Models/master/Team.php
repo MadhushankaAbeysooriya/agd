@@ -2,9 +2,11 @@
 
 namespace App\Models\master;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Team extends Model
 {
@@ -32,5 +34,15 @@ class Team extends Model
             $model->deleted_by_user_id = auth()->id();
             $model->save();
         });
+    }
+
+    /**
+     * The roles that belong to the Team
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\master;
 
+use App\Models\User;
 use App\Models\master\Team;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
 use App\DataTables\master\TeamDataTable;
 
 class TeamController extends Controller
@@ -70,5 +72,28 @@ class TeamController extends Controller
     public function destroy(Team $team)
     {
         //
+    }
+
+    public function addUsersView($encryptedId)
+    {
+        $id = Crypt::decrypt($encryptedId);
+
+        $team = Team::findOrFail($id);
+
+        $users = User::where('status',1)->get();
+
+        $user_team = $team->users->pluck('fname','fname')->toArray();
+
+        return view('teams.add_users',compact('team','users','user_team'));
+    }
+
+    public function addUsers(Team $team, Request $request)
+    {
+        if(!empty($request->users)){
+            $team->users()->sync([$request->users]);
+        }
+
+        return redirect()->route('teams.index')->with('success','Users Added');
+
     }
 }
