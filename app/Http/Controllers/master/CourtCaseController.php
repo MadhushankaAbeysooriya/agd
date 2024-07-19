@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\master;
 
-use App\Models\master\CaseCategory;
+use App\Http\Controllers\Controller;
+use App\Models\master\CourtCase;
 use Illuminate\Http\Request;
 
-class CaseCategoryController extends Controller
+class CourtCaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class CaseCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CaseCategory $caseCategory)
+    public function show(CourtCase $courtCase)
     {
         //
     }
@@ -42,7 +43,7 @@ class CaseCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CaseCategory $caseCategory)
+    public function edit(CourtCase $courtCase)
     {
         //
     }
@@ -50,7 +51,7 @@ class CaseCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CaseCategory $caseCategory)
+    public function update(Request $request, CourtCase $courtCase)
     {
         //
     }
@@ -58,7 +59,7 @@ class CaseCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CaseCategory $caseCategory)
+    public function destroy(CourtCase $courtCase)
     {
         //
     }
