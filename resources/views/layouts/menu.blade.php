@@ -18,7 +18,7 @@
                 <a href="{{route('teams.index')}}" class="nav-link
                 {{ request()->routeIs('teams.edit','teams.index')?'active':'' }}">
                     <i class="far fa-circle nav-icon"></i>
-                        <p>Class</p>
+                        <p>Teams</p>
                 </a>
             </li>
         </ul>

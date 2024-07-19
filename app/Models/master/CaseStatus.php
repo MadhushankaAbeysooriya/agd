@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\master;
 
 use App\Models\master\CourtCase;
 use Illuminate\Database\Eloquent\Model;

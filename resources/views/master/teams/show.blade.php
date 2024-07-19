@@ -28,7 +28,7 @@
                 <div class="card-header">
                     <h3 class="card-title">View Team</h3>
                     <div class="card-tools">
-                        <a class="btn btn-primary" href="{{ route('groups.index') }}"> Back</a>
+                        <a class="btn btn-primary" href="{{ route('teams.index') }}"> Back</a>
                     </div>
                 </div>
 

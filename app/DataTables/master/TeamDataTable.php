@@ -6,6 +6,7 @@ use App\Models\master\Team;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\EloquentDataTable;
+use Illuminate\Support\Facades\Crypt;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
@@ -22,8 +23,21 @@ class TeamDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'team.action')
-            ->setRowId('id');
+            ->addIndexColumn()
+            ->addColumn('action', function ($team) {
+                $encryptedId = Crypt::encrypt($team->id);
+                $btn = '';
+                    $btn .= '<a href="'.route('teams.edit',$encryptedId).'"
+                    class="btn btn-xs btn-info" data-toggle="tooltip" title="Edit">
+                    <i class="fa fa-pen-alt"></i> </a> ';
+
+                    $btn .= '<a href="'.route('teams.show',$encryptedId).'"
+                    class="btn btn-xs btn-secondary" data-toggle="tooltip" title="View">
+                    <i class="fa fa-eye"></i> </a> ';
+
+                return $btn;
+            })
+            ->rawColumns(['action']);;
     }
 
     /**
@@ -62,15 +76,13 @@ class TeamDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false)->width(40),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('name')->data('name')->title('Name'),
         ];
     }
 
