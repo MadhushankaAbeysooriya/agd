@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('courts', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique();
             $table->timestamps();
+
+            $table->bigInteger('created_by_user_id')->unsigned()->nullable();
+            $table->bigInteger('updated_by_user_id')->unsigned()->nullable();
+            $table->bigInteger('deleted_by_user_id')->unsigned()->nullable();
+            $table->foreign('created_by_user_id')->references('id')->on('users');
+            $table->foreign('updated_by_user_id')->references('id')->on('users');
+            $table->foreign('deleted_by_user_id')->references('id')->on('users');
+
+            $table->softDeletes();
         });
     }
 

@@ -13,7 +13,28 @@ return new class extends Migration
     {
         Schema::create('court_cases', function (Blueprint $table) {
             $table->id();
+            $table->string('case_no')->unique();
+            $table->string('case_file_no');
+
+            $table->string('title');
+            $table->string('client_name');
+
+            $table->date('started_date');
+            $table->date('closed_date');
+
+            $table->unsignedBigInteger('court_id');
+            $table->foreign('court_id')->references('id')->on('courts')->onDelete('cascade');
+
             $table->timestamps();
+
+            $table->bigInteger('created_by_user_id')->unsigned()->nullable();
+            $table->bigInteger('updated_by_user_id')->unsigned()->nullable();
+            $table->bigInteger('deleted_by_user_id')->unsigned()->nullable();
+            $table->foreign('created_by_user_id')->references('id')->on('users');
+            $table->foreign('updated_by_user_id')->references('id')->on('users');
+            $table->foreign('deleted_by_user_id')->references('id')->on('users');
+
+            $table->softDeletes();
         });
     }
 
