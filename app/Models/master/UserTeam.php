@@ -19,6 +19,8 @@ class UserTeam extends Model
         'team_id',
     ];
 
+
+
     /**
      * Get the user that owns the UserTeam
      *

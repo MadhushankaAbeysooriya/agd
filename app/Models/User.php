@@ -61,6 +61,6 @@ class User extends Authenticatable
      */
     public function teams(): BelongsToMany
     {
-        return $this->belongsToMany(Team::class);
+        return $this->belongsToMany(Team::class, 'user_teams','user_id','team_id')->withTimestamps();
     }
 }

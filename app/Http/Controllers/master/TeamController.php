@@ -105,15 +105,33 @@ class TeamController extends Controller
      */
     public function update(UpdateTeamRequest $request, Team $team)
     {
-        $team->update($request->toArray());
+        DB::beginTransaction();
 
-        if(!empty($request->users)){
-            $team->users()->sync($request->users);
-        }else {
-            $team->users()->detach();
+        try {
+            // Update the team
+            $team->update($request->toArray());
+
+            // Sync or detach users
+            if (!empty($request->users)) {
+                $team->users()->sync($request->users);
+            } else {
+                $team->users()->detach();
+            }
+
+            // Commit the transaction
+            DB::commit();
+
+            return redirect()->route('teams.index')->with('success', 'Team Updated');
+        } catch (Exception $e) {
+            // Rollback the transaction
+            DB::rollback();
+
+            // Log the error for further investigation
+            Log::error('Error updating team: ' . $e->getMessage());
+
+            // Redirect back with an error message
+            return redirect()->route('teams.index')->with('error', 'An error occurred while updating the team. Please try again.');
         }
-
-        return redirect()->route('teams.index')->with('success', 'Team Updated');
     }
 
     /**
