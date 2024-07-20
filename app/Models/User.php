@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\master\CourtCase;
 use App\Models\master\Location;
 use App\Models\master\Team;
 use Laravel\Passport\HasApiTokens;
@@ -62,5 +64,10 @@ class User extends Authenticatable
     public function teams(): BelongsToMany
     {
         return $this->belongsToMany(Team::class, 'user_teams','user_id','team_id')->withTimestamps();
+    }
+
+    public function courtcases(): BelongsToMany
+    {
+        return $this->belongsToMany(CourtCase::class, 'user_court_cases','user_id','court_case_id')->withTimestamps();
     }
 }

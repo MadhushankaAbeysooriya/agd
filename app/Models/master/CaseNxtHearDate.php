@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CaseNxtHearDate extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
-    protected $table = 'case_statuses';
+    protected $table = 'case_nxt_hear_dates';
     protected $fillable = [
         'court_case_id',
         'nxt_hear_date',
