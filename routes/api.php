@@ -33,4 +33,6 @@ Route::middleware('auth:api')->get('/team-get-all', [TeamController::class, 'get
 
 Route::middleware('auth:api')->get('/get-team-members', [TeamController::class, 'getTeamMembers']);
 
+Route::middleware('auth:api')->get('/get-user-detail', [TeamController::class, 'getUserDetail']);
+
 Route::middleware('auth:api')->get('/court-case-get-all', [CourtCaseController::class, 'getAll']);

@@ -61,4 +61,30 @@ class TeamController extends Controller
             return response()->json(['error' => 'An error occurred.'], 500);
         }
     }
+
+    public function getUserDetail(Request $request)
+    {
+        // Validate the request
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required|exists:users,id',
+        ], [
+            'user_id.required' => 'The user id field is required.',
+            'user_id.exists' => 'The selected user id is invalid.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors(), 'status' => 0], 200);
+        }
+
+        try {
+            // Find the user
+            $user = User::findOrFail($request->input('user_id'));
+
+
+            return response()->json(['user' => $user], 200);
+
+        } catch (Exception $e) {
+            return response()->json(['error' => 'An error occurred.'], 500);
+        }
+    }
 }
