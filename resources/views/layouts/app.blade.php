@@ -78,8 +78,8 @@
                 <div class="float-right d-none d-sm-block">
                     <b>Version </b> 1.0.0
                 </div>
-                <strong>Copyright &copy; <?= date('Y') ?> Software Solution by Directorate of Information Technology.</strong>
-                SRI LANKA ARMY
+                <strong>Copyright &copy; 2014-2023 InfoMark.</strong> All rights
+                reserved.
 
             </footer>
         </div>

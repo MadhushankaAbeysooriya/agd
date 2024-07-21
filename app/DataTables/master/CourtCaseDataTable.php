@@ -2,18 +2,18 @@
 
 namespace App\DataTables\master;
 
-use App\Models\master\Team;
+use App\Models\master\CourtCase;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\EloquentDataTable;
 use Illuminate\Support\Facades\Crypt;
+use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
-class TeamDataTable extends DataTable
+class CourtCaseDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -35,6 +35,10 @@ class TeamDataTable extends DataTable
                     class="btn btn-xs btn-secondary" data-toggle="tooltip" title="View">
                     <i class="fa fa-eye"></i> </a> ';
 
+                    $btn .= '<a href="'.route('court_cases.assign_view',$encryptedId).'"
+                    class="btn btn-xs btn-warning" data-toggle="tooltip" title="Assign">
+                    <i class="fa fa-plus"></i> </a> ';
+
                 return $btn;
             })
             ->rawColumns(['action']);
@@ -43,7 +47,7 @@ class TeamDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(Team $model): QueryBuilder
+    public function query(CourtCase $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -54,7 +58,7 @@ class TeamDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('team-table')
+                    ->setTableId('courtcase-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
@@ -82,7 +86,7 @@ class TeamDataTable extends DataTable
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
-            Column::make('name')->data('name')->title('Name'),
+            Column::make('case_no')->data('case_no')->title('Case No'),
         ];
     }
 
@@ -91,6 +95,6 @@ class TeamDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Team_' . date('YmdHis');
+        return 'CourtCase_' . date('YmdHis');
     }
 }

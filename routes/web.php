@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\master\CourtCase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -9,7 +10,7 @@ use App\Http\Controllers\MyLocationController;
 use App\Http\Controllers\LoginDetailController;
 use App\Http\Controllers\master\TeamController;
 use App\Http\Controllers\ChangePasswordController;
-
+use App\Http\Controllers\master\CourtCaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,5 +43,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/logindetails',[LoginDetailController::class,'index'])->name('logindetails.index');
 
     Route::resource('teams', TeamController::class);
+
+    Route::get('/court_cases/assign-view/{id}',[CourtCaseController::class,'addCourtCaseView'])->name('court_cases.assign_view');
+    Route::post('/court_cases/assign-store/{court_case}',[CourtCaseController::class,'addCourtCaseStore'])->name('court_cases.assign_store');
+    Route::resource('court_cases', CourtCaseController::class);
 
 });

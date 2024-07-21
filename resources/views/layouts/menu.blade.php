@@ -6,6 +6,14 @@
     </a>
 </li>
 
+<li class="nav-item">
+    <a href="{{route('court_cases.index')}}" class="nav-link
+    {{ request()->routeIs('court_cases.edit','court_cases.index','court_cases.create','court_cases.show','court_cases.assign_view')?'active':'' }}">
+        <i class="nav-icon fas fa-file"></i>
+            <p>Case Mgt</p>
+    </a>
+</li>
+
 
     <li class="nav-item {{ request()->routeIs('my-locations*')?'menu-open':'' }}">
         <a href="#" class="nav-link">

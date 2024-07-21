@@ -148,7 +148,7 @@ class TeamController extends Controller
 
         $team = Team::findOrFail($id);
 
-        $users = User::where('status',1)->get();
+        $users = User::all();
 
         $user_team = $team->users->pluck('fname','fname')->toArray();
 
