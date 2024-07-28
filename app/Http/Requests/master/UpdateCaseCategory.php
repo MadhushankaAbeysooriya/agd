@@ -4,7 +4,7 @@ namespace App\Http\Requests\master;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateTeamRequest extends FormRequest
+class UpdateCaseCategory extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class UpdateTeamRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255|unique:teams,name,'.$this->team->id,
+            'name' => 'required|string|max:255|unique:case_categories,name,'.$this->case_category->id,
         ];
     }
 
@@ -33,9 +33,6 @@ class UpdateTeamRequest extends FormRequest
             'name.string' => 'The Name field must be a string.',
             'name.max' => 'The Name field may not be greater than :max characters.',
             'name.unique' => 'This Name is already exists',
-            'description.required' => 'The description field is required.',
-            'description.string' => 'The description field must be a string.',
-            'description.max' => 'The description field may not be greater than :max characters.',
         ];
     }
 }
