@@ -4,7 +4,7 @@ namespace App\Http\Requests\master;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCourtCategory extends FormRequest
+class UpdateCaseCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class UpdateCourtCategory extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255|unique:court_categories,name,'.$this->court_category->id,
+            'name' => 'required|string|max:255|unique:case_categories,name,'.$this->case_category->id,
         ];
     }
 

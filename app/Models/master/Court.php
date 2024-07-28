@@ -2,9 +2,11 @@
 
 namespace App\Models\master;
 
+use App\Models\master\CourtCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Court extends Model
 {
@@ -31,5 +33,10 @@ class Court extends Model
             $model->deleted_by_user_id = auth()->id();
             $model->save();
         });
+    }
+
+    public function courtcategories(): BelongsToMany
+    {
+        return $this->belongsToMany(CourtCategory::class, 'court_court_categories', 'court_id', 'court_category_id')->withTimestamps();
     }
 }

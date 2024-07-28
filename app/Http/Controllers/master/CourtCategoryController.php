@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\master\StoreCourtCategory;
 use App\DataTables\master\CourtCategoryDataTable;
 use App\Http\Requests\master\UpdateCourtCategory;
+use App\Http\Requests\master\StoreCourtCategoryRequest;
+use App\Http\Requests\master\UpdateCourtCategoryRequest;
 
 class CourtCategoryController extends Controller
 {
@@ -41,7 +43,7 @@ class CourtCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCourtCategory $request)
+    public function store(StoreCourtCategoryRequest $request)
     {
         DB::beginTransaction();
 
@@ -92,7 +94,7 @@ class CourtCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCourtCategory $request, CourtCategory $court_category)
+    public function update(UpdateCourtCategoryRequest $request, CourtCategory $court_category)
     {
         DB::beginTransaction();
 

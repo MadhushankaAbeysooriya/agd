@@ -4,7 +4,7 @@ namespace App\Http\Requests\master;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCaseCategory extends FormRequest
+class StoreCourtRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,9 @@ class StoreCaseCategory extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255|unique:case_categories',
+            'name' => 'required|string|max:255|unique:courts',
+            'court_categories' => 'required|array',
+            'court_categories.*' => 'integer|exists:court_categories,id',
         ];
     }
 
@@ -32,7 +34,11 @@ class StoreCaseCategory extends FormRequest
             'name.required' => 'The Name field is required.',
             'name.string' => 'The Name field must be a string.',
             'name.max' => 'The Name field may not be greater than :max characters.',
-            'name.unique' => 'This Name is already exists',
+            'name.unique' => 'This Name already exists.',
+            'court_categories.required' => 'The Court Category field is required.',
+            'court_categories.array' => 'The Court Category field must be an array.',
+            'court_categories.*.integer' => 'Each selected court category must be a valid integer.',
+            'court_categories.*.exists' => 'Each selected court category must exist in the court categories table.',
         ];
     }
 }

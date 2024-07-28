@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\master\StoreCaseCategory;
 use App\DataTables\master\CaseCategoryDataTable;
 use App\Http\Requests\master\UpdateCaseCategory;
+use App\Http\Requests\master\StoreCaseCategoryRequest;
+use App\Http\Requests\master\UpdateCaseCategoryRequest;
 
 class CaseCategoryController extends Controller
 {
@@ -41,7 +43,7 @@ class CaseCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCaseCategory $request)
+    public function store(StoreCaseCategoryRequest $request)
     {
         DB::beginTransaction();
 
@@ -92,7 +94,7 @@ class CaseCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCaseCategory $request, CaseCategory $case_category)
+    public function update(UpdateCaseCategoryRequest $request, CaseCategory $case_category)
     {
         DB::beginTransaction();
 

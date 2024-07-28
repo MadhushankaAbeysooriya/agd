@@ -15,7 +15,7 @@ class CourtCourtCategory extends Model
     protected $table = 'court_court_categories';
     protected $fillable = [
         'court_id',
-        'court_categories_id',
+        'court_category_id',
     ];
 
     public function court(): BelongsTo
@@ -25,6 +25,6 @@ class CourtCourtCategory extends Model
 
     public function courtcategory(): BelongsTo
     {
-        return $this->belongsTo(CourtCategory::class, 'court_categories_id');
+        return $this->belongsTo(CourtCategory::class, 'court_category_id');
     }
 }
