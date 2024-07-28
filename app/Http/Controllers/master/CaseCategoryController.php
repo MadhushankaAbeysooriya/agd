@@ -58,7 +58,7 @@ class CaseCategoryController extends Controller
             DB::rollback();
 
             // Log the error for further investigation
-            Log::error('Error creating team: ' . $e->getMessage());
+            Log::error('Error creating Case Category: ' . $e->getMessage());
 
             // Redirect back with an error message
             return redirect()->route('case_categories.index')->with('error', 'An error occurred while creating the case category. Please try again.');
@@ -119,8 +119,14 @@ class CaseCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CaseCategory $caseCategory)
+    public function destroy($encryptedId)
     {
-        //
+        $id = Crypt::decrypt($encryptedId);
+
+        $case_category = CaseCategory::find($id);
+
+        $case_category->delete();
+
+        return redirect()->route('case_categories.index')->with('success', 'Case Category Deleted');
     }
 }

@@ -137,9 +137,15 @@ class TeamController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Team $team)
+    public function destroy($encryptedId)
     {
-        //
+        $id = Crypt::decrypt($encryptedId);
+
+        $team = Team::find($id);
+
+        $team->delete();
+
+        return redirect()->route('teams.index')->with('success', 'Team Deleted');
     }
 
     public function addUsersView($encryptedId)

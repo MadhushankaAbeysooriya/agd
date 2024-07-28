@@ -15,7 +15,7 @@
 </li>
 
 
-    <li class="nav-item {{ request()->routeIs('teams*','case_categories*')?'menu-open':'' }}">
+    <li class="nav-item {{ request()->routeIs('teams*','case_categories*','court_categories*','courts*')?'menu-open':'' }}">
         <a href="#" class="nav-link">
             <i class="nav-icon fas fa-cogs text-blue"></i>
             <p>Master Data<i class="right fas fa-angle-left text-blue"></i></p>

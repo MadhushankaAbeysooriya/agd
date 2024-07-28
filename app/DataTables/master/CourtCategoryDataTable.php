@@ -2,15 +2,16 @@
 
 namespace App\DataTables\master;
 
-use App\Models\CourtCategory;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use App\Models\master\CourtCategory;
+use Illuminate\Support\Facades\Crypt;
+use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class CourtCategoryDataTable extends DataTable
 {
@@ -22,8 +23,21 @@ class CourtCategoryDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'courtcategory.action')
-            ->setRowId('id');
+            ->addIndexColumn()
+            ->addColumn('action', function ($court_category) {
+                $encryptedId = Crypt::encrypt($court_category->id);
+                $btn = '';
+                    $btn .= '<a href="'.route('court_categories.edit',$encryptedId).'"
+                    class="btn btn-xs btn-info" data-toggle="tooltip" title="Edit">
+                    <i class="fa fa-pen-alt"></i> </a> ';
+
+                    $btn .= '<a href="'.route('court_categories.show',$encryptedId).'"
+                    class="btn btn-xs btn-secondary" data-toggle="tooltip" title="View">
+                    <i class="fa fa-eye"></i> </a> ';
+
+                return $btn;
+            })
+            ->rawColumns(['action']);
     }
 
     /**
@@ -47,12 +61,12 @@ class CourtCategoryDataTable extends DataTable
                     ->orderBy(1)
                     ->selectStyleSingle()
                     ->buttons([
+                        Button::make('add'),
                         Button::make('excel'),
                         Button::make('csv'),
                         Button::make('pdf'),
                         Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
+                        Button::make('reset')
                     ]);
     }
 
@@ -62,15 +76,13 @@ class CourtCategoryDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::make('DT_RowIndex')->title('#')->searchable(false)->orderColumn(false)->width(40),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('name')->data('name')->title('Name'),
         ];
     }
 
