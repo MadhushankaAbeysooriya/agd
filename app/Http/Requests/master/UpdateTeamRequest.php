@@ -22,7 +22,7 @@ class UpdateTeamRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255|unique:teams',
+            'name' => 'required|string|max:255|unique:teams,name,'.$this->team->id,
             'description' => 'required|string|max:255',
         ];
     }

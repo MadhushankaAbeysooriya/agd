@@ -52,6 +52,19 @@
                         </div>
                     </div>
 
+                    <div class="form-group row">
+                        <label class="col-sm-2">
+                            <strong>Users:</strong>
+                        </label>
+                        <div class="col-sm-10">
+                            @if(!empty($team->users))
+                                @foreach($team->users as $v)
+                                    <label class="badge badge-success mr-1">{{ $v->fname }}</label>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

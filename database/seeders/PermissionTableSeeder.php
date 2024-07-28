@@ -66,6 +66,54 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'master-team-delete',
                 'guard_name' => 'web',
             ],
+            [
+                'name' => 'master-case-category-list',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'master-case-category-create',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'master-case-category-edit',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'master-case-category-delete',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'master-court-category-list',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'master-court-category-create',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'master-court-category-edit',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'master-court-category-delete',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'master-court-list',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'master-court-create',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'master-court-edit',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'master-court-delete',
+                'guard_name' => 'web',
+            ],
         ]);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\master\Court;
 use App\Models\master\CourtCase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -9,8 +10,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MyLocationController;
 use App\Http\Controllers\LoginDetailController;
 use App\Http\Controllers\master\TeamController;
+use App\Http\Controllers\master\CourtController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\master\CourtCaseController;
+use App\Http\Controllers\master\CaseCategoryController;
+use App\Http\Controllers\master\CourtCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +47,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/logindetails',[LoginDetailController::class,'index'])->name('logindetails.index');
 
     Route::resource('teams', TeamController::class);
+
+    Route::resource('case_categories', CaseCategoryController::class);
+
+    Route::resource('court_categories', CourtCategoryController::class);
+
+    Route::resource('courts', CourtController::class);
 
     Route::get('/court_cases/assign-view/{id}',[CourtCaseController::class,'addCourtCaseView'])->name('court_cases.assign_view');
     Route::post('/court_cases/assign-store/{court_case}',[CourtCaseController::class,'addCourtCaseStore'])->name('court_cases.assign_store');

@@ -15,7 +15,7 @@
 </li>
 
 
-    <li class="nav-item {{ request()->routeIs('my-locations*')?'menu-open':'' }}">
+    <li class="nav-item {{ request()->routeIs('teams*')?'menu-open':'' }}">
         <a href="#" class="nav-link">
             <i class="nav-icon fas fa-cogs text-blue"></i>
             <p>Master Data<i class="right fas fa-angle-left text-blue"></i></p>
@@ -23,10 +23,40 @@
 
         <ul class="nav nav-treeview">
             <li class="nav-item">
+                <a href="{{route('case_categories.index')}}" class="nav-link
+                {{ request()->routeIs('case_categories.edit','case_categories.index')?'active':'' }}">
+                    <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Case Category</p>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{route('court_categories.index')}}" class="nav-link
+                {{ request()->routeIs('court_categories.edit','court_categories.index')?'active':'' }}">
+                    <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Court Category</p>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{route('courts.index')}}" class="nav-link
+                {{ request()->routeIs('courts.edit','courts.index')?'active':'' }}">
+                    <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Court</p>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
                 <a href="{{route('teams.index')}}" class="nav-link
                 {{ request()->routeIs('teams.edit','teams.index')?'active':'' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                        <p>Teams</p>
+                    <i class="far fa-circle nav-icon text-blue"></i>
+                        <p>Team</p>
                 </a>
             </li>
         </ul>
