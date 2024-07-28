@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CourtCaseController;
 use App\Http\Controllers\MyLocationController;
 use App\Http\Controllers\LoginDetailController;
 use App\Http\Controllers\master\TeamController;
 use App\Http\Controllers\master\CourtController;
 use App\Http\Controllers\ChangePasswordController;
-use App\Http\Controllers\master\CourtCaseController;
 use App\Http\Controllers\master\CaseCategoryController;
 use App\Http\Controllers\master\CourtCategoryController;
 

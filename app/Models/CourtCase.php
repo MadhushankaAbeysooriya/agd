@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models\master;
+namespace App\Models;
 
 use App\Models\User;
+use App\Models\CaseStatus;
 use App\Models\master\Court;
-use App\Models\master\CaseStatus;
+use App\Models\CaseNxtHearDate;
 use App\Models\master\CaseCategory;
-use App\Models\master\CaseNxtHearDate;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\master\CourtCaseCategory;
 use Illuminate\Database\Eloquent\SoftDeletes;

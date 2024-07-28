@@ -1,16 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\master;
+namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\CourtCase;
 use Illuminate\Http\Request;
-use App\Models\master\CourtCase;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
-use App\DataTables\master\CourtCaseDataTable;
+use App\DataTables\CourtCaseDataTable;
 
 class CourtCaseController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:master-case-list|master-case-create|master-case-edit|master-case-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:master-case-create', ['only' => ['create','store']]);
+        $this->middleware('permission:master-case-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:master-case-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -24,7 +31,8 @@ class CourtCaseController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        return view('master.teams.create',compact('users'));
     }
 
     /**

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\DataTables\master;
+namespace App\DataTables;
 
-use App\Models\master\CourtCase;
+use App\Models\CourtCase;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Illuminate\Support\Facades\Crypt;

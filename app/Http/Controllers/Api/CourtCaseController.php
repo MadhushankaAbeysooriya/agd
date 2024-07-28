@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use Exception;
-use Illuminate\Http\Request;
-use App\Models\master\CourtCase;
-use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\CourtCase;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class CourtCaseController extends Controller

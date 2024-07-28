@@ -114,6 +114,22 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'master-court-delete',
                 'guard_name' => 'web',
             ],
+            [
+                'name' => 'master-case-list',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'master-case-create',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'master-case-edit',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'master-case-delete',
+                'guard_name' => 'web',
+            ],
         ]);
     }
 }

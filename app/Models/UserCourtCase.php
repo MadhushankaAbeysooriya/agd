@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Models\master;
+namespace App\Models;
 
-use App\Models\master\CaseCategory;
-use App\Models\master\CourtCase;
+use App\Models\User;
+use App\Models\CourtCase;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class CourtCaseCategory extends Model
+class UserCourtCase extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'court_case_categories';
+    protected $table = 'user_court_cases';
     protected $fillable = [
         'court_case_id',
-        'case_category_id',
+        'user_id',
     ];
 
     public function courtcase(): BelongsTo
@@ -24,8 +24,8 @@ class CourtCaseCategory extends Model
         return $this->belongsTo(CourtCase::class, 'court_case_id');
     }
 
-    public function casecategory(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(CaseCategory::class, 'case_category_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
