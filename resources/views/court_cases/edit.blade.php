@@ -147,6 +147,7 @@
 
 @section('third_party_stylesheets')
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/admin/css/adminlte.css') }}">
 @endsection
 
 @section('third_party_scripts')

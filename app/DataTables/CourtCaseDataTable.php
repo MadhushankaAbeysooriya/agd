@@ -24,14 +24,14 @@ class CourtCaseDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addIndexColumn()
-            ->addColumn('action', function ($team) {
-                $encryptedId = Crypt::encrypt($team->id);
+            ->addColumn('action', function ($court_case) {
+                $encryptedId = Crypt::encrypt($court_case->id);
                 $btn = '';
-                    $btn .= '<a href="'.route('teams.edit',$encryptedId).'"
+                    $btn .= '<a href="'.route('court_cases.edit',$encryptedId).'"
                     class="btn btn-xs btn-info" data-toggle="tooltip" title="Edit">
                     <i class="fa fa-pen-alt"></i> </a> ';
 
-                    $btn .= '<a href="'.route('teams.show',$encryptedId).'"
+                    $btn .= '<a href="'.route('court_cases.show',$encryptedId).'"
                     class="btn btn-xs btn-secondary" data-toggle="tooltip" title="View">
                     <i class="fa fa-eye"></i> </a> ';
 

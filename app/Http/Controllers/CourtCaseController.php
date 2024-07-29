@@ -51,7 +51,7 @@ class CourtCaseController extends Controller
     {
         DB::beginTransaction();
 
-        //try {
+        try {
             // Create the CourtCase
             $court_case = CourtCase::create($request->all());
 
@@ -70,7 +70,7 @@ class CourtCaseController extends Controller
             DB::commit();
 
             return redirect()->route('court_cases.index')->with('success', 'Case created');
-        /*} catch (Exception $e) {
+        } catch (Exception $e) {
             // Rollback the transaction
             DB::rollback();
 
@@ -79,39 +79,85 @@ class CourtCaseController extends Controller
 
             // Redirect back with an error message
             return redirect()->route('court_cases.create')->with('error', 'An error occurred while creating the Case. Please try again.');
-        }*/
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(CourtCase $courtCase)
+    public function show($encryptedId)
     {
-        //
+        $id = Crypt::decrypt($encryptedId);
+
+        $court_case = CourtCase::find($id);
+
+        return view('court_cases.show',compact('court_case'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CourtCase $courtCase)
+    public function edit($encryptedId)
     {
-        //
+        $id = Crypt::decrypt($encryptedId);
+
+        $court_case = CourtCase::find($id);
+
+        $courts = Court::all();
+
+        $case_categories = CaseCategory::all();
+
+        $court_case_categories = $court_case->casecategories->pluck('name','name')->toArray();
+
+        return view('court_cases.edit',compact('court_case','courts','case_categories','court_case_categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCourtCaseRequest $request, CourtCase $courtCase)
+    public function update(UpdateCourtCaseRequest $request, CourtCase $court_case)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            // Update the team
+            $court_case->update($request->toArray());
+
+            // Sync or detach users
+            if (!empty($request->case_categories)) {
+                $court_case->casecategories()->sync($request->case_categories);
+            } else {
+                $court_case->casecategories()->detach();
+            }
+
+            // Commit the transaction
+            DB::commit();
+
+            return redirect()->route('court_cases.index')->with('success', 'Case updated');
+        } catch (Exception $e) {
+            // Rollback the transaction
+            DB::rollback();
+
+            // Log the error for further investigation
+            Log::error('Error updating case: ' . $e->getMessage());
+
+            // Redirect back with an error message
+            return redirect()->route('court_cases.create')->with('error', 'An error occurred while updating the case. Please try again.');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CourtCase $courtCase)
+    public function destroy($encryptedId)
     {
-        //
+        $id = Crypt::decrypt($encryptedId);
+
+        $court_case = CourtCase::find($id);
+
+        $court_case->delete();
+
+        return redirect()->route('court_cases.index')->with('success', 'Court Case Deleted');
     }
 
     public function addCourtCaseView($encryptedId)
