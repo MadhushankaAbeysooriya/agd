@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\User;
 use App\Models\CourtCase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
 use App\DataTables\CourtCaseDataTable;
+use App\Http\Requests\StoreCourtCaseRequest;
+use App\Http\Requests\UpdateCourtCaseRequest;
+use App\Models\master\CaseCategory;
+use App\Models\master\Court;
 
 class CourtCaseController extends Controller
 {
@@ -31,16 +38,48 @@ class CourtCaseController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-        return view('master.teams.create',compact('users'));
+        $courts = Court::all();
+        $case_categories = CaseCategory::all();
+
+        return view('court_cases.create',compact('courts','case_categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCourtCaseRequest $request)
     {
-        //
+        DB::beginTransaction();
+
+        //try {
+            // Create the CourtCase
+            $court_case = CourtCase::create($request->all());
+
+            // Sync case categories
+            if (!empty($request->case_categories)) {
+                $court_case->casecategories()->sync($request->case_categories);
+            }
+
+            // Create status
+            $court_case->casestatuses()->create([
+                'status' => 0,
+            ]);
+
+
+            // Commit the transaction
+            DB::commit();
+
+            return redirect()->route('court_cases.index')->with('success', 'Case created');
+        /*} catch (Exception $e) {
+            // Rollback the transaction
+            DB::rollback();
+
+            // Log the error for further investigation
+            Log::error('Error creating case: ' . $e->getMessage());
+
+            // Redirect back with an error message
+            return redirect()->route('court_cases.create')->with('error', 'An error occurred while creating the Case. Please try again.');
+        }*/
     }
 
     /**
@@ -62,7 +101,7 @@ class CourtCaseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CourtCase $courtCase)
+    public function update(UpdateCourtCaseRequest $request, CourtCase $courtCase)
     {
         //
     }

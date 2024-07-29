@@ -35,7 +35,7 @@ class CourtCaseController extends Controller
                         'title' => $courtcase->title,
                         'client_name' => $courtcase->client_name,
                         'started_date' => $courtcase->started_date,
-                        'closed_date' => $courtcase->closed_date,
+                        'closed_date' => $courtcase->closed_date ? $courtcase->closed_date : null,
                         'court' => $courtcase->court->name,
                         'latest_status' => $latestCaseStatus ? $latestCaseStatus->status : null,
                     ];

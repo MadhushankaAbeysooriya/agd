@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('client_name');
 
             $table->date('started_date');
-            $table->date('closed_date');
+            $table->date('closed_date')->nullable();
 
             $table->unsignedBigInteger('court_id');
             $table->foreign('court_id')->references('id')->on('courts')->onDelete('cascade');
