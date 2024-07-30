@@ -175,11 +175,15 @@ class CourtCaseController extends Controller
 
     public function addCourtCaseStore(CourtCase $court_case, Request $request)
     {
+        $request->validate([
+            'users' => 'array',
+            'users.*' => 'exists:users,id'
+        ]);
+
         if(!empty($request->users)){
-            $court_case->users()->sync([$request->users]);
+            $court_case->users()->sync($request->users);
         }
 
-        return redirect()->route('court_cases.index')->with('success','Counsellors Added');
-
+        return redirect()->route('court_cases.index')->with('success', 'Counsellors Added');
     }
 }

@@ -84,9 +84,13 @@ class CourtCaseDataTable extends DataTable
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
-                  ->width(60)
+                  ->width(80)
                   ->addClass('text-center'),
             Column::make('case_no')->data('case_no')->title('Case No'),
+            Column::make('case_file_no')->data('case_file_no')->title('Case File No'),
+            Column::make('title')->data('title')->title('Title'),
+            Column::make('client_name')->data('client_name')->title('Client Name'),
+            Column::make('started_date')->data('started_date')->title('Start Date'),
         ];
     }
 
